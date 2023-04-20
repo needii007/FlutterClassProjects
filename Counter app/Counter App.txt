@@ -1,0 +1,181 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Counter App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Counter App'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+  int _multiPalCounter = 3;
+
+  ///////////////// increment method
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  ///////////////// decrement method
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+
+  ///////////////// increment+3 method
+  void _incrementCounters() {
+    setState(() {
+      _multiPalCounter = _multiPalCounter + 3;
+    });
+  }
+
+  void reset() {
+    _counter = 0;
+    _multiPalCounter = 0;
+    setState(() {});
+  }
+
+  ///////////////// decrement-3 method
+  void _decrementCounters() {
+    setState(() {
+      _multiPalCounter = _multiPalCounter - 3;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.blueGrey.withOpacity(0.7),
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
+        title: Text(widget.title),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: <Widget>[
+
+          const SizedBox(
+            height: 10,
+          ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blueGrey[300],
+              ),
+              onPressed: () {
+                reset();
+              },
+              child: const Text(
+                "Clear",
+              )),
+          const SizedBox(
+            height: 10,
+          ),
+          const Text(
+            "Simple Counter:",
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Text(
+            '$_counter',
+            style: Theme.of(context)
+                .textTheme
+                .headlineMedium!
+                .copyWith(color: Colors.white),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FloatingActionButton(
+                backgroundColor: Colors.blueGrey,
+                onPressed: _incrementCounter,
+                tooltip: 'Increment',
+                child: const Icon(Icons.add),
+              ),
+              const SizedBox(
+                width: 30,
+              ),
+              FloatingActionButton(
+                backgroundColor: Colors.blueGrey,
+                onPressed: _decrementCounter,
+                tooltip: 'decrement',
+                child: const Icon(Icons.remove),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          const Text(
+            "Multi-Counter:",
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            '$_multiPalCounter',
+            style: Theme.of(context)
+                .textTheme
+                .headlineMedium!
+                .copyWith(color: Colors.white),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FloatingActionButton(
+                backgroundColor: Colors.blueGrey,
+                onPressed: _incrementCounters,
+                tooltip: 'Increment',
+                child: const Icon(Icons.add),
+              ),
+              const SizedBox(
+                width: 30,
+              ),
+              FloatingActionButton(
+                backgroundColor: Colors.blueGrey,
+                onPressed: _decrementCounters,
+                tooltip: 'decrement',
+                child: const Icon(Icons.remove),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
